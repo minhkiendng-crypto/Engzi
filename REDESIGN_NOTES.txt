@@ -1,0 +1,24 @@
+Engzi Redesign
+==============
+This package is based directly on Engzi-fixed-local.zip.
+
+UI changes:
+- Redesigned frontend with a clean, playful language-learning-app visual style.
+- Green/white learning theme, rounded cards, progress bars, hearts, XP and streak.
+- Responsive mobile and desktop layout.
+- Redesigned welcome, goal, home/course path, part, lesson, placement test, ranking and profile screens.
+- Existing Java/Spring Boot backend, question bank, endpoints and JavaScript logic are preserved.
+- No backend package rename was performed to avoid breaking existing Spring Boot wiring.
+
+Build note:
+- Maven build was not run in the generation environment because Maven is not installed there.
+
+
+[ANIMATION UPDATE]
+- Added mascot idle floating/blinking animation.
+- Added screen/card entrance animation.
+- Added hover/press motion to interactive controls.
+- Added learning-tree unlock animation.
+- Added progress-bar transition.
+- Added correct/wrong answer motion classes.
+- Added completion celebration particles.

@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engzi — Học tiếng Anh mỗi ngày</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<section id="welcomeScreen" class="screen active">
+
+
+<div class="welcome-box">
+
+    <div class="engzi-mascot">
+        <div class="mascot-face">
+            <div class="mascot-eye left"></div>
+            <div class="mascot-eye right"></div>
+            <div class="mascot-beak"></div>
+        </div>
+        <div class="mascot-body"></div>
+    </div>
+
+    <h1>🌳 Engzi</h1>
+
+    <p class="subtitle">
+        Học tiếng Anh theo cách của bạn
+    </p>
+
+    <button
+        class="primary-btn"
+        id="startButton"
+        onclick="startApp()">
+        🚀 Bắt đầu
+    </button>
+
+    <div class="welcome-auth-actions">
+        <button class="welcome-auth-link" onclick="showScreen('loginScreen')">Đã có tài khoản? Đăng nhập</button>
+        <a class="welcome-google-link" href="/oauth2/authorization/google"><span class="google-g">G</span> Tiếp tục với Google</a>
+    </div>
+
+    <p class="small-text">
+        Học • Luyện tập • Tiến bộ • Giao tiếp
+    </p>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     PROFILE / ONBOARDING
+===================================================== -->
+<section id="profileIntroScreen" class="screen">
+<div class="page-box onboarding-box">
+  <div class="top-title"><div class="mini-mascot"><div class="mini-face"><span></span><span></span><i></i></div></div><div><h2>👋 Trước khi bắt đầu</h2><p>Cho Engzi biết một chút về bạn nhé</p></div></div>
+  <label class="onboarding-label" for="learnerName">Bạn tên gì?</label>
+  <input id="learnerName" class="onboarding-input" maxlength="30" placeholder="Ví dụ: Minh Kien" autocomplete="given-name">
+  <p class="description">Tên này chỉ dùng để Engzi chào bạn và cá nhân hóa hành trình học.</p>
+  <button class="primary-btn" onclick="continueFromProfile()">Tiếp tục →</button>
+</div>
+</section>
+
+<section id="languageScreen" class="screen">
+<div class="page-box onboarding-box">
+  <div class="top-title"><div class="mini-mascot"><div class="mini-face"><span></span><span></span><i></i></div></div><div><h2>🌎 Bạn muốn học ngôn ngữ nào?</h2><p>Chọn ngôn ngữ bạn muốn học cùng Engzi</p></div></div>
+  <div class="goal-grid language-grid">
+    <button class="goal-card selected" data-language="english" onclick="selectLanguage('english', this)"><span>🇬🇧</span><strong>Tiếng Anh</strong><small>Đang được hỗ trợ đầy đủ</small></button>
+    <button class="goal-card" data-language="japanese" onclick="selectLanguage('japanese', this)"><span>🇯🇵</span><strong>Tiếng Nhật</strong><small>Sắp có</small></button>
+    <button class="goal-card" data-language="korean" onclick="selectLanguage('korean', this)"><span>🇰🇷</span><strong>Tiếng Hàn</strong><small>Sắp có</small></button>
+    <button class="goal-card" data-language="chinese" onclick="selectLanguage('chinese', this)"><span>🇨🇳</span><strong>Tiếng Trung</strong><small>Sắp có</small></button>
+  </div>
+  <button id="languageContinue" class="primary-btn" onclick="continueFromLanguage()">Tiếp tục →</button>
+</div>
+</section>
+
+<section id="sourceScreen" class="screen">
+<div class="page-box onboarding-box">
+  <div class="top-title"><div class="mini-mascot"><div class="mini-face"><span></span><span></span><i></i></div></div><div><h2>🔎 Bạn biết đến Engzi qua đâu?</h2><p>Câu trả lời giúp Engzi hiểu người học của mình hơn</p></div></div>
+  <div class="goal-grid source-grid">
+    <button class="goal-card" onclick="selectSource('Bạn bè / người thân', this)"><span>👨‍👩‍👧‍👦</span><strong>Bạn bè / người thân</strong></button>
+    <button class="goal-card" onclick="selectSource('Google / tìm kiếm', this)"><span>🔎</span><strong>Google / tìm kiếm</strong></button>
+    <button class="goal-card" onclick="selectSource('YouTube / TikTok', this)"><span>▶️</span><strong>YouTube / TikTok</strong></button>
+    <button class="goal-card" onclick="selectSource('Trường học', this)"><span>🏫</span><strong>Trường học</strong></button>
+    <button class="goal-card" onclick="selectSource('Cuộc thi / sự kiện', this)"><span>🏆</span><strong>Cuộc thi / sự kiện</strong></button>
+    <button class="goal-card" onclick="selectSource('Khác', this)"><span>✨</span><strong>Khác</strong></button>
+  </div>
+  <button id="sourceContinue" class="primary-btn" disabled onclick="continueFromSource()">Tiếp tục →</button>
+</div>
+</section>
+
+<!-- =====================================================
+     GOAL
+===================================================== -->
+
+<section id="goalScreen" class="screen">
+
+
+<div class="page-box">
+
+    <div class="top-title">
+
+        <div class="mini-mascot">
+            <div class="mini-face">
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+        </div>
+
+        <div>
+            <h2>🎯 Bạn học tiếng Anh để làm gì?</h2>
+            <p>Chọn mục tiêu phù hợp với bạn</p>
+        </div>
+
+    </div>
+
+
+    <div class="goal-grid">
+
+        <button
+            class="goal-card"
+            data-goal="communication"
+            onclick="selectGoal('communication')">
+
+            <span>💬</span>
+            <strong>Giao tiếp</strong>
+            <small>Nói chuyện tự tin</small>
+
+        </button>
+
+
+        <button
+            class="goal-card"
+            data-goal="travel"
+            onclick="selectGoal('travel')">
+
+            <span>🌍</span>
+            <strong>Du lịch</strong>
+            <small>Giao tiếp khi đi xa</small>
+
+        </button>
+
+
+        <button
+            class="goal-card"
+            data-goal="school"
+            onclick="selectGoal('school')">
+
+            <span>🏫</span>
+            <strong>Trường học</strong>
+            <small>Học tập và kiểm tra</small>
+
+        </button>
+
+
+        <button
+            class="goal-card"
+            data-goal="work"
+            onclick="selectGoal('work')">
+
+            <span>💼</span>
+            <strong>Công việc</strong>
+            <small>Tiếng Anh công việc</small>
+
+        </button>
+
+
+        <button
+            class="goal-card"
+            data-goal="entertainment"
+            onclick="selectGoal('entertainment')">
+
+            <span>🎬</span>
+            <strong>Giải trí</strong>
+            <small>Phim, nhạc và game</small>
+
+        </button>
+
+
+        <button
+            class="goal-card"
+            data-goal="study"
+            onclick="selectGoal('study')">
+
+            <span>📚</span>
+            <strong>Học tập</strong>
+            <small>Nâng cao kiến thức</small>
+
+        </button>
+
+    </div>
+
+
+    <button
+        class="primary-btn"
+        id="goalContinue"
+        disabled
+        onclick="goToInfo()">
+
+        Tiếp tục →
+
+    </button>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     LEVEL / INFO
+===================================================== -->
+
+<section id="infoScreen" class="screen">
+
+
+<div class="page-box">
+
+    <div class="top-title">
+
+        <div class="mini-mascot">
+            <div class="mini-face">
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+        </div>
+
+        <div>
+            <h2>📊 Trình độ hiện tại của bạn?</h2>
+            <p>Hãy chọn mức gần đúng nhất</p>
+        </div>
+
+    </div>
+
+
+    <p class="description">
+        Engzi sẽ kiểm tra lại bằng bài kiểm tra đầu vào 30 câu.
+    </p>
+
+
+    <div class="level-list">
+
+        <button
+            class="level-card"
+            onclick="chooseInfo('beginner')">
+
+            <span>🌱</span>
+
+            <div>
+                <strong>Tôi mới bắt đầu</strong>
+                <small>
+                    Chưa biết hoặc biết rất ít tiếng Anh
+                </small>
+            </div>
+
+        </button>
+
+
+        <button
+            class="level-card"
+            onclick="chooseInfo('basic')">
+
+            <span>🌿</span>
+
+            <div>
+                <strong>Tôi biết một chút</strong>
+                <small>
+                    Biết một số từ và câu cơ bản
+                </small>
+            </div>
+
+        </button>
+
+
+        <button
+            class="level-card"
+            onclick="chooseInfo('good')">
+
+            <span>🌳</span>
+
+            <div>
+                <strong>Tôi khá</strong>
+                <small>
+                    Đã có nền tảng tiếng Anh
+                </small>
+            </div>
+
+        </button>
+
+
+        <button
+            class="level-card"
+            onclick="chooseInfo('unknown')">
+
+            <span>❓</span>
+
+            <div>
+                <strong>Không chắc</strong>
+                <small>
+                    Hãy để Engzi kiểm tra
+                </small>
+            </div>
+
+        </button>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     PLACEMENT TEST - 30 QUESTIONS
+===================================================== -->
+
+<section id="testScreen" class="screen">
+
+
+<div class="test-container">
+
+    <div class="test-header">
+
+        <button
+            class="back-btn"
+            onclick="goToInfo()">
+            ←
+        </button>
+
+
+        <div class="test-progress-box">
+
+            <div class="progress-bar">
+                <div
+                    id="testProgress"
+                    class="progress-fill">
+                </div>
+            </div>
+
+            <span>
+                Câu
+                <b id="testQuestionNumber">1</b>
+                /30
+            </span>
+
+        </div>
+
+
+        <div class="heart-display">
+            ❤️ <span id="testHearts">5</span>
+        </div>
+
+    </div>
+
+
+    <div class="question-box">
+
+        <span
+            class="question-topic"
+            id="testTopic">
+            Cơ bản
+        </span>
+
+
+        <h2 id="testQuestion">
+            Đang tải câu hỏi...
+        </h2>
+
+
+        <div
+            id="testAnswers"
+            class="answer-list">
+        </div>
+
+
+        <div
+            id="testExplanation"
+            class="explanation hidden">
+        </div>
+
+    </div>
+
+
+    <button
+        id="testNextButton"
+        class="primary-btn"
+        onclick="nextPlacementQuestion()"
+        disabled>
+
+        Tiếp tục →
+
+    </button>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     TEST RESULT
+===================================================== -->
+
+<section id="resultScreen" class="screen">
+
+
+<div class="result-box">
+
+    <div class="result-icon">
+        🎉
+    </div>
+
+
+    <h1>
+        Hoàn thành bài kiểm tra!
+    </h1>
+
+
+    <p>
+        Điểm của bạn:
+    </p>
+
+
+    <div class="score-circle">
+
+        <span id="testScore">
+            0
+        </span>
+
+        <small>
+            /30
+        </small>
+
+    </div>
+
+
+    <h2 id="testLevel">
+        Đang xác định trình độ...
+    </h2>
+
+
+    <p id="testMessage">
+        Engzi đã phân tích kết quả của bạn.
+    </p>
+
+
+    <button
+        class="primary-btn"
+        onclick="finishTest()">
+
+        🌳 Bắt đầu học
+
+    </button>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     HOME / LEARNING TREE
+===================================================== -->
+
+<section id="homeScreen" class="screen">
+
+
+<header class="app-header">
+
+    <div class="brand">
+
+        <div class="mini-mascot">
+            <div class="mini-face">
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+        </div>
+
+
+        <div>
+            <strong>Engzi</strong>
+            <small>🌳 Cây học tập</small>
+        </div>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            ❤️ <span id="heartCount">5</span>
+        </div>
+
+        <div class="stat">
+            🔥 <span id="streakCount">0</span>
+        </div>
+
+        <div class="stat">
+            ⭐ <span id="xpCount">0</span>
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="home-content">
+
+    <div class="welcome-user">
+
+        <div>
+
+            <p>
+                Chào mừng bạn trở lại 👋
+            </p>
+
+            <h1>
+                🌳 Cây học tập
+            </h1>
+
+            <span id="goalText">
+                Chọn mục tiêu để bắt đầu
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="home-actions">
+
+        <button
+            class="action-card"
+            onclick="goHome()">
+
+            <span>🌳</span>
+            <strong>Học</strong>
+            <small>Tiếp tục hành trình</small>
+
+        </button>
+
+
+        <button
+            class="action-card"
+            onclick="showReview()">
+
+            <span>📖</span>
+            <strong>Ôn tập</strong>
+            <small>Ôn lại kiến thức</small>
+
+        </button>
+
+
+        <button
+            class="action-card"
+            onclick="goRanking()">
+
+            <span>🏆</span>
+            <strong>Bảng xếp hạng</strong>
+            <small>Xem thành tích</small>
+
+        </button>
+
+
+        <button
+            class="action-card"
+            onclick="goProfile()">
+
+            <span>👤</span>
+            <strong>Hồ sơ</strong>
+            <small>Tiến trình của bạn</small>
+
+        </button>
+
+    </div>
+
+
+    <div class="doors-section">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>🚪 Hành trình học</h2>
+                <p>Khám phá từng cánh cửa</p>
+            </div>
+
+        </div>
+
+
+        <div
+            id="doorsContainer"
+            class="doors-container">
+        </div>
+
+    </div>
+
+</main>
+
+
+</section>
+
+<!-- =====================================================
+     PART SCREEN
+===================================================== -->
+
+<section id="partScreen" class="screen">
+
+
+<div class="part-container">
+
+    <button
+        class="back-btn"
+        onclick="goBackFromPart()">
+
+        ← Quay lại
+
+    </button>
+
+
+    <div class="part-header">
+
+        <div class="mini-mascot">
+
+            <div class="mini-face">
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <p id="partDoorTitle">
+                Cửa 1
+            </p>
+
+            <h1 id="partTitle">
+                Phần 1
+            </h1>
+
+            <p id="partDescription">
+                Học những kiến thức cơ bản
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="partsContainer"
+        class="parts-container">
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     LESSON
+===================================================== -->
+
+<section id="lessonScreen" class="screen">
+
+
+<div class="lesson-container">
+
+    <header class="lesson-header">
+
+        <button
+            class="back-btn"
+            onclick="exitLesson()">
+
+            ✕
+
+        </button>
+
+
+        <div class="lesson-progress-box">
+
+            <div class="progress-bar">
+
+                <div
+                    id="lessonProgress"
+                    class="progress-fill">
+                </div>
+
+            </div>
+
+
+            <span>
+                Câu
+                <b id="lessonQuestionNumber">1</b>
+                /
+                <b id="lessonQuestionTotal">10</b>
+            </span>
+
+        </div>
+
+
+        <div class="heart-display">
+
+            ❤️
+            <span id="lessonHearts">
+                5
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <div class="lesson-location">
+
+        <span>
+            🚪 Cửa
+            <b id="currentDoorNumber">1</b>
+        </span>
+
+        <span>•</span>
+
+        <span>
+            📚 Phần
+            <b id="currentPartNumber">1</b>
+        </span>
+
+        <span>•</span>
+
+        <span>
+            📝 Bài
+            <b id="currentLessonNumber">1</b>
+        </span>
+
+    </div>
+
+
+    <main class="lesson-main">
+
+        <div class="lesson-mascot">
+
+            <div class="mini-mascot">
+
+                <div class="mini-face">
+                    <span></span>
+                    <span></span>
+                    <i></i>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="ai-lesson-badge">✦ Gemini AI • Cá nhân hóa</div>
+
+        <span
+            id="lessonType"
+            class="question-topic">
+
+            Từ vựng
+
+        </span>
+
+
+        <h1 id="lessonQuestion">
+            Đang tải...
+        </h1>
+
+
+        <div
+            id="lessonAnswers"
+            class="answer-list">
+        </div>
+
+
+        <div
+            id="lessonExplanation"
+            class="explanation hidden">
+        </div>
+
+    </main>
+
+
+    <div class="lesson-bottom">
+
+        <div
+            id="lessonFeedback"
+            class="feedback hidden">
+        </div>
+
+
+        <button
+            id="lessonNextButton"
+            class="primary-btn"
+            onclick="nextLessonQuestion()"
+            disabled>
+
+            Kiểm tra
+
+        </button>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     LESSON COMPLETE
+===================================================== -->
+
+<section id="lessonCompleteScreen" class="screen">
+
+
+<div class="complete-box">
+
+    <div class="complete-icon">
+        🎉
+    </div>
+
+
+    <h1>
+        Hoàn thành bài!
+    </h1>
+
+
+    <p>
+        Bạn đã hoàn thành:
+    </p>
+
+
+    <div class="complete-info">
+
+        <div>
+            🚪 Cửa
+            <strong id="completedDoorNumber">
+                1
+            </strong>
+        </div>
+
+
+        <div>
+            📚 Phần
+            <strong id="completedPartNumber">
+                1
+            </strong>
+        </div>
+
+
+        <div>
+            📝 Bài
+            <strong id="completedLessonNumber">
+                1
+            </strong>
+        </div>
+
+    </div>
+
+
+    <div class="complete-stats">
+
+        <div>
+            ⭐
+            <strong id="lessonXpEarned">
+                0
+            </strong>
+            <small>XP</small>
+        </div>
+
+
+        <div>
+            🎯
+            <strong id="lessonScore">
+                0
+            </strong>
+            <small>đúng</small>
+        </div>
+
+    </div>
+
+
+    <button
+        class="primary-btn"
+        onclick="goHome()">
+
+        🌳 Tiếp tục học
+
+    </button>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     AI CONVERSATION
+===================================================== -->
+<section id="conversationScreen" class="screen">
+  <div class="page-box ai-chat-page">
+    <button class="back-btn" onclick="goHome()">←</button>
+    <div class="ai-chat-hero">
+      <div class="chat-mascot">🧸</div>
+      <div><span class="ai-pill">✦ GEMINI AI</span><h1>🗣️ Nói chuyện với AI</h1><p>Luyện giao tiếp thật với nhân vật AI theo trình độ của bạn.</p></div>
+    </div>
+    <div class="persona-row">
+      <button class="persona-card active" data-persona="một người bạn thân thiện" onclick="selectPersona(this)">🧑‍🤝‍🧑<b>Bạn bè</b><small>Trò chuyện hằng ngày</small></button>
+      <button class="persona-card" data-persona="một giáo viên tiếng Anh kiên nhẫn" onclick="selectPersona(this)">👩‍🏫<b>Giáo viên</b><small>Sửa lỗi & giải thích</small></button>
+      <button class="persona-card" data-persona="nhân viên nhà hàng lịch sự" onclick="selectPersona(this)">🍽️<b>Nhà hàng</b><small>Role-play thực tế</small></button>
+      <button class="persona-card" data-persona="nhân viên lễ tân khách sạn thân thiện" onclick="selectPersona(this)">🏨<b>Khách sạn</b><small>Luyện tình huống</small></button>
+    </div>
+    <div id="aiChatMessages" class="ai-chat-messages"></div>
+    <div id="aiCorrection" class="ai-correction hidden"></div>
+    <div class="ai-chat-input-row">
+      <button id="micButton" class="mic-btn" onclick="toggleMic()" title="Nói bằng microphone">🎙️</button>
+      <input id="aiChatInput" autocomplete="off" placeholder="Viết câu tiếng Anh..." onkeydown="if(event.key==='Enter') sendAIMessage()">
+      <button class="primary-btn chat-send" onclick="sendAIMessage()">Gửi ➜</button>
+    </div>
+    <div class="ai-chat-tools"><button onclick="speakLastAI()">🔊 Nghe lại</button><button onclick="clearAIChat()">↻ Hội thoại mới</button><span id="micStatus">Microphone sẵn sàng</span></div>
+  </div>
+</section>
+
+<button class="ai-floating-launcher" onclick="openAIConversation()" title="Luyện nói với Gemini AI">🤖<span>AI nói chuyện</span></button>
+
+<!-- =====================================================
+     REVIEW
+===================================================== -->
+
+<section id="reviewScreen" class="screen">
+
+
+<div class="page-box">
+
+    <button
+        class="back-btn"
+        onclick="goHome()">
+
+        ←
+
+    </button>
+
+
+    <div class="page-title">
+
+        <div class="mini-mascot">
+
+            <div class="mini-face">
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <h1>
+                📖 Ôn tập
+            </h1>
+
+            <p>
+                Củng cố những gì bạn đã học
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="review-grid">
+
+        <button
+            class="review-card"
+            onclick="startReview('mistakes')">
+
+            <span>❌</span>
+            <strong>Lỗi sai</strong>
+            <small>Ôn lại câu đã làm sai</small>
+
+        </button>
+
+
+        <button
+            class="review-card"
+            onclick="startReview('vocabulary')">
+
+            <span>🧠</span>
+            <strong>Từ vựng</strong>
+            <small>Ôn lại từ mới</small>
+
+        </button>
+
+
+        <button
+            class="review-card"
+            onclick="startHardReview()">
+
+            <span>🔥</span>
+            <strong>Ôn tập khó</strong>
+            <small>15 câu thử thách</small>
+
+        </button>
+
+
+        <button
+            class="review-card"
+            onclick="startInfinitePractice()">
+
+            <span>♾️</span>
+            <strong>Luyện tập vô hạn</strong>
+            <small>Không giới hạn câu hỏi</small>
+
+        </button>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     RANKING
+===================================================== -->
+
+<section id="rankingScreen" class="screen">
+
+
+<div class="page-box">
+
+    <button
+        class="back-btn"
+        onclick="goHome()">
+
+        ←
+
+    </button>
+
+
+    <div class="page-title">
+
+        <div class="mini-mascot">
+
+            <div class="mini-face">
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <h1>
+                🏆 Bảng xếp hạng
+            </h1>
+
+            <p>
+                Thi đua học tập mỗi ngày
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="ranking-list">
+
+        <div class="ranking-item">
+
+            <span>🥇</span>
+            <strong>Bạn</strong>
+
+            <b id="rankingXp">
+                0 XP
+            </b>
+
+        </div>
+
+
+        <div class="ranking-item">
+
+            <span>🥈</span>
+            <strong>Người học 2</strong>
+
+            <b>
+                0 XP
+            </b>
+
+        </div>
+
+
+        <div class="ranking-item">
+
+            <span>🥉</span>
+            <strong>Người học 3</strong>
+
+            <b>
+                0 XP
+            </b>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<section id="profileScreen" class="screen">
+
+
+<div class="page-box">
+
+    <button
+        class="back-btn"
+        onclick="goHome()">
+
+        ←
+
+    </button>
+
+
+    <div class="page-title">
+
+        <div class="mini-mascot">
+
+            <div class="mini-face">
+                <span></span>
+                <span></span>
+                <i></i>
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <h1>
+                👤 Hồ sơ
+            </h1>
+
+            <p>
+                Tiến trình học tập của bạn
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-stats">
+
+        <div class="profile-stat">
+
+            <strong id="profileXp">
+                0
+            </strong>
+
+            <span>
+                ⭐ XP
+            </span>
+
+        </div>
+
+
+        <div class="profile-stat">
+
+            <strong id="profileStreak">
+                0
+            </strong>
+
+            <span>
+                🔥 Streak
+            </span>
+
+        </div>
+
+
+        <div class="profile-stat">
+
+            <strong id="profileLevel">
+                1
+            </strong>
+
+            <span>
+                📈 Level
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-progress">
+
+        <div class="progress-header">
+
+            <span>
+                Tiến trình
+            </span>
+
+            <strong id="profileProgress">
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div
+                id="profileProgressBar"
+                class="progress-fill">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<section id="loginScreen" class="screen">
+
+
+<div class="auth-box">
+
+    <h1>
+        🔐 Đăng nhập Engzi
+    </h1>
+    <p class="auth-subtitle">Tiếp tục hành trình chinh phục tiếng Anh của bạn.</p>
+
+    <label class="auth-label" for="loginUsername">Email Gmail</label>
+    <input
+        id="loginUsername"
+        type="email"
+        placeholder="ban@gmail.com"
+        autocomplete="email">
+
+
+    <input
+        id="loginPassword"
+        type="password"
+        placeholder="Mật khẩu Engzi"
+        autocomplete="current-password">
+
+
+    <button
+        class="primary-btn"
+        onclick="login()">
+
+        Đăng nhập
+
+    </button>
+
+
+    <a class="google-login-btn" href="/oauth2/authorization/google">
+        <span class="google-g">G</span> Tiếp tục với Google
+    </a>
+    <div class="auth-divider"><span>hoặc bằng email</span></div>
+    <button
+        class="secondary-btn"
+        onclick="showScreen('registerScreen')">
+        Tạo tài khoản mới
+    </button>
+    <button class="text-btn" onclick="showScreen('welcomeScreen')">← Quay lại</button>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     REGISTER
+===================================================== -->
+
+<section id="registerScreen" class="screen">
+
+
+<div class="auth-box">
+
+    <h1>
+        ✨ Tạo tài khoản Engzi
+    </h1>
+    <p class="auth-subtitle">Một tài khoản để lưu hành trình học của bạn.</p>
+
+    <label class="auth-label" for="registerUsername">Email Gmail</label>
+    <input
+        id="registerUsername"
+        type="email"
+        placeholder="ban@gmail.com"
+        autocomplete="email">
+    <label class="auth-label" for="registerPassword">Tạo mật khẩu Engzi (ít nhất 8 ký tự)</label>
+
+
+    <input
+        id="registerPassword"
+        type="password"
+        placeholder="Tạo mật khẩu"
+        autocomplete="new-password">
+
+
+    <button
+        class="primary-btn"
+        onclick="register()">
+
+        Đăng ký
+
+    </button>
+
+
+    <a class="google-login-btn" href="/oauth2/authorization/google">
+        <span class="google-g">G</span> Đăng ký nhanh với Google
+    </a>
+    <button
+        class="secondary-btn"
+        onclick="showScreen('loginScreen')">
+        Đã có tài khoản? Đăng nhập
+    </button>
+
+</div>
+
+
+</section>
+
+<!-- =====================================================
+     SCRIPT
+===================================================== -->
+
+<script src="api-config.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+ENGZI — GHI CHÚ NÂNG CẤP
+
+Đã giữ lại mã nguồn frontend và các controller hiện có, bổ sung phần xác thực thật ở mức cơ bản.
+
+Tệp mới trong src/main/java/com/lingora/:
+- AppUser.java: entity tài khoản
+- AppUserRepository.java: truy vấn tài khoản theo email
+- AppUserDetailsService.java: tải tài khoản cho xác thực Spring Security
+- EngziOidcUserService.java: tiếp nhận hồ sơ Google OIDC và lưu tài khoản
+- SecurityConfig.java: BCrypt, session security context, OAuth2 login
+- AuthController.java: API đăng ký/đăng nhập/đăng xuất/thông tin tài khoản
+
+Tệp đã sửa:
+- pom.xml: thêm Spring Security và OAuth2 Client
+- application.properties: khai báo OAuth registration qua biến môi trường
+- index.html, script.js, style.css: form email và nút Google
+- LingoraApplication.java: bỏ endpoint đăng nhập giả để tránh trùng mapping
+- PlacementController.java: thêm import CrossOrigin bị thiếu
+
+Cần cấu hình GOOGLE_CLIENT_ID và GOOGLE_CLIENT_SECRET mới dùng được OAuth Google.
