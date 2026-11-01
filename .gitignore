@@ -6,3 +6,4 @@ target/
 .env
 application-local.properties
 application-secret.properties
+*.class
